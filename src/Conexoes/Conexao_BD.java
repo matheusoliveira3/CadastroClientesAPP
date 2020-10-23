@@ -5,7 +5,7 @@
  */
 package Conexoes;
 
-import java.beans.Statement;
+import java.sql.Statement;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -26,7 +26,7 @@ public class Conexao_BD {
     private String servidor = "localhost:3306";
     private String nomeDoBanco = "bd_loja";
     private String usuario = "root";
-    private String senha = "Mineiroo1!";
+    private String senha = "root";
  
     //Construtor    
     public Conexao_BD(){

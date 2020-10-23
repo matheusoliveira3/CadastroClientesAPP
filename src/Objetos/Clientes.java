@@ -69,4 +69,13 @@ public class Clientes {
         this.estado = estado;
     }
     
+    public void limpaCliente() {
+        nome = "";
+        cpf = ""; 
+        sexo = "";
+        endereco = "";
+        cidade = "";
+        estado = "";
+    }
+    
 }
