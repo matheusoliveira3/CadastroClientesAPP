@@ -57,9 +57,11 @@ public class Loading extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocation(new java.awt.Point(0, 0));
+        setMaximumSize(new java.awt.Dimension(300, 300));
         setUndecorated(true);
 
-        jPanel1.setBackground(new java.awt.Color(204, 204, 204));
+        jPanel1.setBackground(new java.awt.Color(0, 0, 0));
+        jPanel1.setForeground(new java.awt.Color(0, 51, 153));
 
         barra.setBackground(new java.awt.Color(255, 153, 51));
         barra.setForeground(new java.awt.Color(0, 0, 0));
@@ -67,7 +69,7 @@ public class Loading extends javax.swing.JFrame {
         barra.setOpaque(true);
         barra.setStringPainted(true);
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/logo.png"))); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/logobranco.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
