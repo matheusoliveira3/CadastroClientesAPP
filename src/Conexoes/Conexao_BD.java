@@ -79,6 +79,7 @@ public class Conexao_BD {
         try {
             conn.close();
             return true;
+            
         } catch (Exception e) {
             System.out.println("Erro ao fechar conexao " + e.getMessage());
             return false;
@@ -96,7 +97,7 @@ public class Conexao_BD {
  
             return status;
         } catch (SQLException ex) {
-            ex.printStackTrace();
+          
             return status;
         }
     }
