@@ -9,7 +9,7 @@
 - [ ] Conexão com o Banco de Dados
 - [ ] Busca de clientes ou produtos 
 
-<h1 align= "center">Demostração do programa</h1>
+# Demostração do programa
 ![Tela de carregamento](https://raw.githubusercontent.com/matheusoliveira3/CadastroClientesAPP/main/images/Tela%20de%20carregamento.png)
 ![Tela de menu](https://raw.githubusercontent.com/matheusoliveira3/CadastroClientesAPP/main/images/Tela%20de%20menu.png)
 ![Tela de cadastro de clientes](https://raw.githubusercontent.com/matheusoliveira3/CadastroClientesAPP/main/images/Tela%20de%20cadastro%20de%20clientes.png)
