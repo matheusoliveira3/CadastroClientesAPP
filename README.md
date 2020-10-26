@@ -10,6 +10,7 @@
 - [ ] Busca de clientes ou produtos 
 
 <h1 align= "center">Demostração do programa</h1>
-![Tela de menu](.png)
-![Tela de cadastro de clientes](.png)
-![Tela de cadastro de produtos](.png)
+![Tela de carregamento](https://raw.githubusercontent.com/matheusoliveira3/CadastroClientesAPP/main/images/Tela%20de%20carregamento.png)
+![Tela de menu](https://raw.githubusercontent.com/matheusoliveira3/CadastroClientesAPP/main/images/Tela%20de%20menu.png)
+![Tela de cadastro de clientes](https://raw.githubusercontent.com/matheusoliveira3/CadastroClientesAPP/main/images/Tela%20de%20cadastro%20de%20clientes.png)
+![Tela de cadastro de produtos](https://raw.githubusercontent.com/matheusoliveira3/CadastroClientesAPP/main/images/Tela%20de%20cadastro%20de%20produtos.png)
