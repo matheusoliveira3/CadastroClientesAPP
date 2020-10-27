@@ -25,6 +25,13 @@
 ### Tela de menu
 
 [<img align="left" src="https://raw.githubusercontent.com/matheusoliveira3/CadastroClientesAPP/main/images/Tela%20de%20menu%20pequena.png" />](https://raw.githubusercontent.com/matheusoliveira3/CadastroClientesAPP/main/images/Tela%20de%20menu.png) [Tela de menu](https://raw.githubusercontent.com/matheusoliveira3/CadastroClientesAPP/main/images/Tela%20de%20menu.png) 
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
 
 ### Tela de cadastro de clientes
 
