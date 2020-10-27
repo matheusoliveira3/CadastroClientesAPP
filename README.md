@@ -5,6 +5,8 @@
 
 
 
+<h3>Etapas do Projeto:</h3>
+
 - [x] Interface Gráfica
 - [x] Cadastro de Usuário
 - [x] Funcionalidade dos Botões
