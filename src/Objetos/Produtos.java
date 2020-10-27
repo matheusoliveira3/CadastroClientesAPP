@@ -1,75 +1,74 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Objetos;
 
-/**
- *
- * @author mathe
- */
 public class Produtos {
-    
-    private String nome;
+
+    private int id;
     private String categoria;
-    private String preco;
-    private String custo;
-    private String id;
+    private String nome;
+    private int estoque;
+    private float preco;
+    private float custo;
 
-    public Produtos(String nome, String categoria, String preco, String custo) {
-        this.nome = nome;
-        this.categoria = categoria;
-        this.preco = preco;
-        this.custo = custo;
-    }
+    
 
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public String getCategoria() {
-        return categoria;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public void setCategoria(String categoria) {
         this.categoria = categoria;
     }
 
-    public String getPreco() {
-        return preco;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
-    public void setPreco(String preco) {
+    public void setEstoque(int estoque) {
+        this.estoque = estoque;
+    }
+
+    public void setPreco(float preco) {
         this.preco = preco;
     }
 
-    public String getCusto() {
-        return custo;
-    }
-
-    public void setCusto(String custo) {
+    public void setCusto(float custo) {
         this.custo = custo;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public String getCategoria() {
+        return categoria;
     }
 
-            public void limpaProduto() {
+    public String getNome() {
+        return nome;
+    }
+
+    public int getEstoque() {
+        return estoque;
+    }
+
+    public float getPreco() {
+        return preco;
+    }
+
+    public float getCusto() {
+        return custo;
+    }
+
+    public void limpaProdutos() {
         nome = "";
-        categoria = ""; 
-        id = "";
-        preco = "";
-        custo = "";
-            
+        categoria = "";
+        id = 0;
+        estoque = 0;
+        preco = 0;
+        custo = 0;
+    }
+
+    public int getId(int aInt) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

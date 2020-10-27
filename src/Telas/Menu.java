@@ -16,7 +16,7 @@ public class Menu extends javax.swing.JFrame {
     }
 
     CadCliente cadCliente = new CadCliente();
-    Produtos cadProdutos = new Produtos();
+    CadProdutos cadProdutos = new CadProdutos();
     public Menu() {
         initComponents();
         CadCliente cdlientes = new CadCliente();

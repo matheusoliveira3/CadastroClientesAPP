@@ -74,6 +74,7 @@ public class Conexao_BD {
             System.out.println("Conexão não realizada - ERRO: " + e.getMessage());
         }
     }
+    
  
     public boolean fechaBanco(){
         try {
