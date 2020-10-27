@@ -17,24 +17,24 @@
 <h3 align="center">Tela de Carregamento</h3>
 
 <p align ="center">
-<img src ="https://raw.githubusercontent.com/matheusoliveira3/CadastroClientesAPP/main/images/Tela%20de%20carregamento%20pequena.png"</>
+<img src ="https://raw.githubusercontent.com/matheusoliveira3/CadastroClientesAPP/main/images/Tela%20de%20carregamento.png"</>
 
 
 <h3 align="center">Tela de Menu</h3>
 
 <p align ="center">
- <img src ="https://raw.githubusercontent.com/matheusoliveira3/CadastroClientesAPP/main/images/Tela%20de%20menu%20pequena.png"</>
+ <img src ="https://raw.githubusercontent.com/matheusoliveira3/CadastroClientesAPP/main/images/Tela%20de%20menu.png"</>
 
 
 
 <h3 align="center">Tela do Cadastro de Clientes/Produtos</h3>
 
 <p align ="center">
- <img src ="https://raw.githubusercontent.com/matheusoliveira3/CadastroClientesAPP/main/images/Tela%20de%20cadastro%20de%20clientes%20pequena.png"</>
+ <img src ="https://raw.githubusercontent.com/matheusoliveira3/CadastroClientesAPP/main/images/Tela%20de%20cadastro%20de%20clientes.png"</>
 
 
 <h3 align="center">Tela de Consulta de Clientes/Produtos
 
 <p align ="center">
-  <img src ="https://raw.githubusercontent.com/matheusoliveira3/CadastroClientesAPP/main/images/Tela%20de%20cadastro%20de%20produtos%20pequena.png"</>
+  <img src ="https://raw.githubusercontent.com/matheusoliveira3/CadastroClientesAPP/main/images/Tela%20de%20cadastro%20de%20produtos.png"</>
 
