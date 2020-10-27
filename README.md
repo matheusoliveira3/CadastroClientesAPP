@@ -8,8 +8,7 @@
 - [ ] Funcionalidade dos Botões
 - [ ] Conexão com o Banco de Dados
 - [ ] Busca de clientes ou produtos 
-
-# Demostração do programa
+<h1 align= "center">Demostração do programa</h1>
 
 ### Tela de carregamento
 
