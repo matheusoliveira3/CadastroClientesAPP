@@ -9,10 +9,10 @@
 :dart:
 
 - :white_check_mark: Interface Gráfica
-- [x] Cadastro de Usuário
-- [x] Funcionalidade dos Botões
-- [x] Conexão com o Banco de Dados
-- [x] Busca de clientes ou produtos 
+- :white_check_mark: Cadastro de Usuário
+- :white_check_mark: Funcionalidade dos Botões
+- :white_check_mark: Conexão com o Banco de Dados
+- :white_check_mark: Busca de clientes ou produtos 
 <h1 align= "center">Demostração do programa</h1>
 
 <h3 align="center">Tela de Carregamento</h3>
