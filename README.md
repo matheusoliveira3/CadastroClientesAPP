@@ -5,7 +5,7 @@
 
 
 
-<h3>Etapas do Projeto:</h3> 
+<h3>:dart: Etapas do Projeto:</h3> 
 
 - :white_check_mark: Interface Gráfica
 - :white_check_mark: Cadastro de Usuário
