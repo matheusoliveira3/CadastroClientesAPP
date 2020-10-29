@@ -5,7 +5,8 @@
 
 
 
-:dart: <h3>Etapas do Projeto:</h3> :dart:
+<h3>Etapas do Projeto:</h3> 
+:dart:
 
 - [x] Interface Gráfica
 - [x] Cadastro de Usuário
