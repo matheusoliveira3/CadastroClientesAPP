@@ -8,7 +8,7 @@
 <h3>Etapas do Projeto:</h3> 
 :dart:
 
-- [x] Interface Gráfica
+- :white_check_mark: Interface Gráfica
 - [x] Cadastro de Usuário
 - [x] Funcionalidade dos Botões
 - [x] Conexão com o Banco de Dados
