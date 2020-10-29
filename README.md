@@ -14,26 +14,26 @@
 - :white_check_mark: Busca de clientes ou produtos 
 <h1 align= "center">:gem: Demostração do programa :gem:</h1>
 
-<h3 align="center">Tela de Carregamento</h3>
+<h3 align="center">:white_check_mark: Tela de Carregamento</h3>
 
 <p align ="center">
 <img src ="https://raw.githubusercontent.com/matheusoliveira3/CadastroClientesAPP/main/images/Tela%20de%20carregamento.png"</>
 
 
-<h3 align="center">Tela de Menu</h3>
+<h3 align="center">:white_check_mark: Tela de Menu</h3>
 
 <p align ="center">
  <img src ="https://raw.githubusercontent.com/matheusoliveira3/CadastroClientesAPP/main/images/Tela%20de%20menu.png"</>
 
 
 
-<h3 align="center">Tela de Cadastro/Consulta de Clientes</h3>
+<h3 align="center">:white_check_mark: Tela de Cadastro/Consulta de Clientes</h3>
 
 <p align ="center">
  <img src ="https://raw.githubusercontent.com/matheusoliveira3/CadastroClientesAPP/main/images/Tela%20de%20cadastro%20de%20clientes.png"</>
 
 
-<h3 align="center">Tela de Cadastro/Consulta de Produtos
+<h3 align="center">:white_check_mark: Tela de Cadastro/Consulta de Produtos
 
 <p align ="center">
   <img src ="https://raw.githubusercontent.com/matheusoliveira3/CadastroClientesAPP/main/images/Tela%20de%20cadastro%20de%20produtos.png"</>
