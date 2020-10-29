@@ -1,4 +1,4 @@
- <h1 align= "center">CADASTRO/CONSULTA DE CLIENTE/PRODUTO (JAVA)</h1> 
+ <h1 align= "center">:warning: CADASTRO/CONSULTA DE CLIENTE/PRODUTO (JAVA):warning: </h1> 
 <p align= "center"><i>Sistema de cadastro e busca de clientes/produtos, feito em Java usando JFRAME, POO e MYSQL.</p></i>
 <p align="center"><i>O programa feito usando JFRAME permite a pastelaria cadastrar um novo cliente/produto e fazer consultas de algum cliente/produto.</p></i>
 <p align="center"><i>Assim que o usuário cadastra um novo cliente com as atribuições que foram dadas na declaração de variáveis do MYSQL, esse cliente automaticamente sera salvo na tabela de Clientes e todos seus dados ficarão armazenados la, com o produto ocorre a mesma coisa porém ficara armazenado na tabela de produtos.</p></i>
@@ -12,7 +12,7 @@
 - :white_check_mark: Funcionalidade dos Botões
 - :white_check_mark: Conexão com o Banco de Dados
 - :white_check_mark: Busca de clientes ou produtos 
-<h1 align= "center">Demostração do programa :shipit:</h1>
+<h1 align= "center">Demostração do programa</h1>
 
 <h3 align="center">Tela de Carregamento</h3>
 
