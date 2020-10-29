@@ -12,7 +12,7 @@
 - :white_check_mark: Funcionalidade dos Botões
 - :white_check_mark: Conexão com o Banco de Dados
 - :white_check_mark: Busca de clientes ou produtos 
-<h1 align= "center">Demostração do programa</h1>
+<h1 align= "center">:gem: Demostração do programa :gem:</h1>
 
 <h3 align="center">Tela de Carregamento</h3>
 
