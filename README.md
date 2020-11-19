@@ -29,6 +29,8 @@
 
 <h3 align="center">:white_check_mark: Tela de Cadastro/Consulta de Clientes</h3>
 
+
+
 <p align ="center">
  <img src ="https://raw.githubusercontent.com/matheusoliveira3/CadastroClientesAPP/main/images/Tela%20de%20cadastro%20de%20clientes.png"</>
 
@@ -39,5 +41,7 @@
 <p align ="center">
   <img src ="https://raw.githubusercontent.com/matheusoliveira3/CadastroClientesAPP/main/images/Tela%20de%20cadastro%20de%20produtos.png"</>
 
+
+<h3>:dart: Diagrama Relacional do Banco de Dados:</h3> 
 <p align ="center">
   <img src ="Diagramas/BancoDeDados.PNG"</>
