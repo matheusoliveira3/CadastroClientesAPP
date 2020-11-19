@@ -42,6 +42,6 @@
   <img src ="https://raw.githubusercontent.com/matheusoliveira3/CadastroClientesAPP/main/images/Tela%20de%20cadastro%20de%20produtos.png"</>
 
 
-<h3>:dart: Diagrama Relacional do Banco de Dados:</h3> 
+<h3>Diagrama Relacional do Banco de Dados:</h3> 
 <p align ="center">
   <img src ="Diagramas/BancoDeDados.PNG"</>
