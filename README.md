@@ -45,6 +45,6 @@
  <p align ="center">
   <img src ="https://user-images.githubusercontent.com/42162426/100016925-e38f8c00-2db8-11eb-8c4e-561395c7fafd.png"</>
   
-<h3>Diagrama Relacional do Banco de Dados:</h3> 
+<h3 align="center">:white_check_mark: Diagrama Relacional do Banco de Dados:</h3> 
 <p align ="center">
   <img src ="Diagramas/BancoDeDados.PNG"</>
