@@ -14,7 +14,7 @@
 - :white_check_mark: Busca de clientes ou produtos 
 <h1 align= "center">:gem: Demostração do programa :gem:</h1>
 
-<h3 align="center">:white_check_mark: Tela de Carregamento</h3>
+<h3 align="center">:white_check_mark: Tela Splash</h3>
 
 <p align ="center">
 <img src ="https://user-images.githubusercontent.com/42162426/100016923-e38f8c00-2db8-11eb-81eb-0e53fd4fdb67.png"</>
@@ -23,7 +23,7 @@
 <h3 align="center">:white_check_mark: Tela de Menu</h3>
 
 <p align ="center">
- ![tela1](https://user-images.githubusercontent.com/42162426/100016923-e38f8c00-2db8-11eb-81eb-0e53fd4fdb67.png)
+<img src =" https://user-images.githubusercontent.com/42162426/100016921-e2f6f580-2db8-11eb-852e-ca46dfacbb88.png"</>
 
 
 
