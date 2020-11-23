@@ -23,7 +23,7 @@
 <h3 align="center">:white_check_mark: Tela de Menu</h3>
 
 <p align ="center">
-<img src =" https://user-images.githubusercontent.com/42162426/100016921-e2f6f580-2db8-11eb-852e-ca46dfacbb88.png"</>
+<img src ="https://user-images.githubusercontent.com/42162426/100016921-e2f6f580-2db8-11eb-852e-ca46dfacbb88.png"</>
 
 
 
