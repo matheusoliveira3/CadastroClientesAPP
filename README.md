@@ -32,16 +32,19 @@
 
 
 <p align ="center">
- <img src ="https://raw.githubusercontent.com/matheusoliveira3/CadastroClientesAPP/main/images/Tela%20de%20cadastro%20de%20clientes.png"</>
+ <img src ="https://user-images.githubusercontent.com/42162426/100016918-e25e5f00-2db8-11eb-8d33-e0a1ecd71e88.png"</>
 
 
 <h3 align="center">:white_check_mark: Tela de Cadastro/Consulta de Produtos
  
 
 <p align ="center">
-  <img src ="https://raw.githubusercontent.com/matheusoliveira3/CadastroClientesAPP/main/images/Tela%20de%20cadastro%20de%20produtos.png"</>
+  <img src ="https://user-images.githubusercontent.com/42162426/100016927-e4282280-2db8-11eb-955d-80b241ecdff2.png"</>
 
-
+<h3 align="center">:white_check_mark: Tela de Cadastro/Consulta de Pedido
+ <p align ="center">
+  <img src ="https://user-images.githubusercontent.com/42162426/100016925-e38f8c00-2db8-11eb-8c4e-561395c7fafd.png"</>
+  
 <h3>Diagrama Relacional do Banco de Dados:</h3> 
 <p align ="center">
   <img src ="Diagramas/BancoDeDados.PNG"</>
