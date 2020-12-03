@@ -35,13 +35,13 @@
  <img src ="images/new_cliente.PNG"</>
 
 
-<h3 align="center">:white_check_mark: Tela de Cadastro/Consulta de Produtos
+<h3 align="center">:white_check_mark: Tela de Cadastro/Consulta de Produtos</h3>
  
 
 <p align ="center">
   <img src ="images/new_produto.PNG"</>
 
-<h3 align="center">:white_check_mark: Tela de Cadastro/Consulta de Pedido
+<h3 align="center">:white_check_mark: Tela de Cadastro/Consulta de Pedido</h3>
  <p align ="center">
   <img src ="images/new_pedidos3.PNG"</>
   
