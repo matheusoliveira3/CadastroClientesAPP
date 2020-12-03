@@ -43,7 +43,7 @@
 
 <h3 align="center">:white_check_mark: Tela de Cadastro/Consulta de Pedido
  <p align ="center">
-  <img src ="images/new_pedidos2.PNG"</>
+  <img src ="images/new_pedidos3.PNG"</>
   
 <h3 align="center">:white_check_mark: Diagrama Relacional do Banco de Dados:</h3> 
 <p align ="center">
