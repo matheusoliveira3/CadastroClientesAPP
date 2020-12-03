@@ -17,7 +17,7 @@
 <h3 align="center">:white_check_mark: Tela Splash</h3>
 
 <p align ="center">
-<img src ="https://user-images.githubusercontent.com/42162426/100016923-e38f8c00-2db8-11eb-81eb-0e53fd4fdb67.png"</>
+<img src ="images/new_carregamento.PNG"</>
 
 
 <h3 align="center">:white_check_mark: Tela de Menu</h3>
