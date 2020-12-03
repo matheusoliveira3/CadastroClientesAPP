@@ -8,6 +8,15 @@ public class Pedido {
     private int id_cliente;
     private int id_produto;
     private int quantidade;
+    private float preco;
+
+    public float getPreco() {
+        return preco;
+    }
+
+    public void setPreco(float preco) {
+        this.preco = preco;
+    }
     
     private String cpf_cliente;
     private String nome_cliente;

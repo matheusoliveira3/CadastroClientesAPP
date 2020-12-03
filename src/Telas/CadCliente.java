@@ -1,20 +1,24 @@
 
-
 package Telas;
 
 import Conexoes.Conexao_BD;
 import Objetos.Clientes;
 import javax.swing.JOptionPane;
 
+import java.awt.PopupMenu;
+
 public class CadCliente extends javax.swing.JFrame {
 
+    
+    
     Conexao_BD conectar = new Conexao_BD();
     Clientes novoCliente = new Clientes();
-
-
+    
     public CadCliente() {
         initComponents();
     }
+    
+    
 
     private void cadastraCliente(Clientes novoCliente){
         
@@ -57,8 +61,6 @@ public class CadCliente extends javax.swing.JFrame {
         }                
     }
    
-    
-    
     private void buscarCliente(Clientes novoCliente){
         this.conectar.conectaBanco();
         
@@ -110,7 +112,54 @@ public class CadCliente extends javax.swing.JFrame {
         
     }
     
-        private void limparCamposCadastro() {
+    private void deletarCliente(Clientes novoCliente){
+        this.conectar.conectaBanco();
+        String consultaCpf = this.consultaCpf.getText();        
+        try {            
+            this.conectar.updateSQL(
+                "DELETE FROM cadastroclientes "
+                + " WHERE "
+                    + "cpf = '" + consultaCpf + "'"
+                + ";"            
+            );
+            
+        } catch (Exception e) {
+            System.out.println("Erro ao deletar cliente " +  e.getMessage());
+            JOptionPane.showMessageDialog(null, "Erro ao deletar cliente");
+        }finally{
+            this.conectar.fechaBanco();
+            limparCamposBusca();
+            JOptionPane.showMessageDialog(null, "Cliente deletado com sucesso");            
+        }     
+        
+    }
+    
+    public void atualizarCliente(Clientes novoCliente){
+        this.conectar.conectaBanco();
+        String consultaCpf = this.consultaCpf.getText();
+        try {
+            this.conectar.updateSQL(
+                "UPDATE cadastroclientes SET "                    
+                    + "nome = '" + consultaNome.getText() + "',"
+                    + "sexo = '" + consultaSexo.getText() + "',"
+                    + "endereco = '" + consultaEndereco.getText() + "',"
+                    + "cidade = '" + consultaCidade.getText() + "',"                   
+                    + "estado = '" + consultaEstado.getText() + "'"
+                + " WHERE "
+                    + "cpf = '" + consultaCpf + "'"
+                + ";"
+            );
+        }catch(Exception e){
+            System.out.println("Erro ao atualizar cliente " +  e.getMessage());
+            JOptionPane.showMessageDialog(null, "Erro ao atualizar cliente");
+        }finally{
+            this.conectar.fechaBanco();
+            limparCamposBusca();
+            JOptionPane.showMessageDialog(null, "Cliente atualizado com sucesso");
+        }
+    }
+    
+    private void limparCamposCadastro() {
         txtNome.setText("");
         txtNome.setText("");
         txtCpf.setText("");
@@ -151,6 +200,8 @@ public class CadCliente extends javax.swing.JFrame {
         btnLimparBusca = new javax.swing.JButton();
         consultaSexo = new javax.swing.JTextField();
         consultaEstado = new javax.swing.JTextField();
+        btnBuscar1 = new javax.swing.JButton();
+        btnLimparBusca1 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
@@ -273,6 +324,26 @@ public class CadCliente extends javax.swing.JFrame {
 
         consultaEstado.setOpaque(false);
 
+        btnBuscar1.setBackground(new java.awt.Color(51, 153, 255));
+        btnBuscar1.setText("Atualizar");
+        btnBuscar1.setBorder(null);
+        btnBuscar1.setPreferredSize(new java.awt.Dimension(63, 23));
+        btnBuscar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscar1ActionPerformed(evt);
+            }
+        });
+
+        btnLimparBusca1.setBackground(new java.awt.Color(255, 51, 51));
+        btnLimparBusca1.setText("Deletar");
+        btnLimparBusca1.setBorder(null);
+        btnLimparBusca1.setPreferredSize(new java.awt.Dimension(63, 23));
+        btnLimparBusca1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimparBusca1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -293,20 +364,26 @@ public class CadCliente extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(consultaEstado))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(consultaSexo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel3)
+                            .addComponent(consultaSexo, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel4)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel7))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                            .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel5)
                                 .addGap(183, 183, 183)
                                 .addComponent(jLabel6)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addGap(253, 253, 253))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(62, 62, 62)
+                .addComponent(btnBuscar1, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(111, 111, 111)
+                .addComponent(btnLimparBusca1, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -329,17 +406,25 @@ public class CadCliente extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(jLabel7))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel6))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(consultaCidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(consultaEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(84, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel6))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(consultaCidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(consultaEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnLimparBusca1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnBuscar1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(57, 57, 57))))
         );
 
         jPanel3.setBackground(new java.awt.Color(51, 51, 51));
@@ -469,9 +554,9 @@ public class CadCliente extends javax.swing.JFrame {
                     .addComponent(jLabel9)
                     .addComponent(jLabel10))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtSexo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(txtSexo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
@@ -486,7 +571,7 @@ public class CadCliente extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtCidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 139, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSalvar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnLimparCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -549,6 +634,14 @@ public class CadCliente extends javax.swing.JFrame {
         
     }//GEN-LAST:event_consultaNomeActionPerformed
 
+    private void btnBuscar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscar1ActionPerformed
+        atualizarCliente(novoCliente);
+    }//GEN-LAST:event_btnBuscar1ActionPerformed
+
+    private void btnLimparBusca1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparBusca1ActionPerformed
+        deletarCliente(novoCliente);
+    }//GEN-LAST:event_btnLimparBusca1ActionPerformed
+
     public static void main(String args[]) {
         
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -560,7 +653,9 @@ public class CadCliente extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
+    private javax.swing.JButton btnBuscar1;
     private javax.swing.JButton btnLimparBusca;
+    private javax.swing.JButton btnLimparBusca1;
     private javax.swing.JButton btnLimparCadastro;
     private javax.swing.JButton btnSalvar;
     private javax.swing.JTextField consultaCidade;

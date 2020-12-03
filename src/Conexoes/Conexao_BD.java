@@ -74,7 +74,6 @@ public class Conexao_BD {
             System.out.println("Conexão não realizada - ERRO: " + e.getMessage());
         }
     }
-    
  
     public boolean fechaBanco(){
         try {
@@ -85,6 +84,21 @@ public class Conexao_BD {
             System.out.println("Erro ao fechar conexao " + e.getMessage());
             return false;
         }
+    }
+    
+    public boolean updateSQL(String pSQL){
+        try {            
+            //createStatement de con para criar o Statement
+            this.setStatement(getConn().createStatement());
+
+            // Definido o Statement, executamos a query no banco de dados
+            getStatement().executeUpdate(pSQL);
+            
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            return false;
+        }
+        return true;
     }
  
     public int insertSQL(String SQL){

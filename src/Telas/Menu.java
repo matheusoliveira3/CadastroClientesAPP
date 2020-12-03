@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Telas;
 
 import java.awt.PopupMenu;
@@ -17,10 +13,10 @@ public class Menu extends javax.swing.JFrame {
     CadPedido cadPedido = new CadPedido();
     CadCliente cadCliente = new CadCliente();
     CadProdutos cadProdutos = new CadProdutos();
+    
     public Menu() {
         initComponents();
-        CadCliente cdlientes = new CadCliente();
-        
+               
     }
     
     @SuppressWarnings("unchecked")
@@ -139,7 +135,7 @@ public class Menu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-           cadCliente.setVisible(true);
+        cadCliente.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -147,12 +143,10 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        cadPedido.setVisible(true);        // TODO add your handling code here:
+        cadPedido.setVisible(true);
     }//GEN-LAST:event_jButton4ActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+    
     public static void main(String args[]) {
         
         

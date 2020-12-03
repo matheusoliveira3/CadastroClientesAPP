@@ -1,24 +1,23 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Telas;
 
 import Conexoes.Conexao_BD;
 import Objetos.Pedido;
 import Objetos.Produtos;
 import Objetos.Clientes;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 
 public class CadPedido extends javax.swing.JFrame {
     
     Conexao_BD conectar = new Conexao_BD();
     Pedido novoPedido = new Pedido();
+    Produtos novoProduto = new Produtos();
        
     public CadPedido() {
         initComponents();
@@ -58,7 +57,76 @@ public class CadPedido extends javax.swing.JFrame {
         }                
     }
    
+    private void listarDados(){
+        
+        this.conectar.conectaBanco();
+        
+        try {
+            this.conectar.executarSQL("select * from cadastroprodutos;");
+            
+            DefaultTableModel modeloProduto = (DefaultTableModel) tbProduto.getModel();
+            modeloProduto.setNumRows(0);
+
+            while(this.conectar.getResultSet().next()){
+                
+                modeloProduto.addRow(new Object[]{this.conectar.getResultSet().getInt(1), this.conectar.getResultSet().getString(3), this.conectar.getResultSet().getString(2), this.conectar.getResultSet().getInt(4), this.conectar.getResultSet().getFloat(6)});
+           
+            }
+                       
+            this.conectar.executarSQL("select * from cadastroclientes;");
+            
+            DefaultTableModel modeloCliente = (DefaultTableModel) tbCliente.getModel();
+            modeloCliente.setNumRows(0);
+
+            while(this.conectar.getResultSet().next()){
+                
+                modeloCliente.addRow(new Object[]{this.conectar.getResultSet().getInt(1), this.conectar.getResultSet().getString(2), this.conectar.getResultSet().getString(3)});
+           
+            }
+            this.conectar.fechaBanco();
+            
+        } catch (Exception e) {
+            
+            System.out.println("Erro ao consultar Lista " +  e.getMessage());
+            JOptionPane.showMessageDialog(null, "Erro ao buscar Lista");
+            
+        }
+    }
     
+    private void listarPedidos(){
+        
+        this.conectar.conectaBanco();
+        
+        try {
+            this.conectar.executarSQL(
+                    "SELECT"
+                    + " pe.id, c.nome, pr.nome, pe.quantidade * pr.preco "                    
+                 + " FROM"
+                     + " cadastroclientes c"
+                           + " inner join (cadastropedidos pe inner join cadastroprodutos pr"
+                           + " on pr.id = pe.id_produto)"
+                           + " on c.id = pe.id_cliente"  
+                + ";"
+            );
+            
+            DefaultTableModel modeloPedido = (DefaultTableModel) tbPedido.getModel();
+            modeloPedido.setNumRows(0);
+
+            while(this.conectar.getResultSet().next()){
+                
+                modeloPedido.addRow(new Object[]{this.conectar.getResultSet().getInt(1), this.conectar.getResultSet().getString(2), this.conectar.getResultSet().getString(3), this.conectar.getResultSet().getFloat(4)});
+           
+            }
+                      
+            this.conectar.fechaBanco();
+            
+        } catch (Exception e) {
+            
+            System.out.println("Erro ao consultar Lista " +  e.getMessage());
+            JOptionPane.showMessageDialog(null, "Erro ao buscar Lista");
+            
+        }
+    }
     
     private void buscarPedido(Pedido novoPedido){
         this.conectar.conectaBanco();
@@ -68,7 +136,7 @@ public class CadPedido extends javax.swing.JFrame {
         try {
             this.conectar.executarSQL(
                    "SELECT"
-                    + " c.cpf, c.nome, pr.nome, pr.categoria, pe.quantidade"                    
+                    + " c.cpf, c.nome, pr.nome, pr.categoria, pe.quantidade, pe.quantidade * pr.preco "                    
                  + " FROM"
                      + " cadastroclientes c"
                            + " inner join (cadastropedidos pe inner join cadastroprodutos pr"
@@ -85,6 +153,7 @@ public class CadPedido extends javax.swing.JFrame {
                 novoPedido.setNome_produto(this.conectar.getResultSet().getString(3));
                 novoPedido.setCategoria_produto(this.conectar.getResultSet().getString(4));
                 novoPedido.setQuantidade(this.conectar.getResultSet().getInt(5));
+                novoPedido.setPreco(this.conectar.getResultSet().getFloat(6));
            }
             
            if(novoPedido.getNome_cliente() == ""){
@@ -103,6 +172,7 @@ public class CadPedido extends javax.swing.JFrame {
             consultaNomeProduto.setText(novoPedido.getNome_produto());
             consultaCategoria.setText(novoPedido.getCategoria_produto());
             consultaQuantidade.setText("" + novoPedido.getQuantidade());
+            consultaValor.setText("" + novoPedido.getPreco());
             
             this.conectar.fechaBanco();
             
@@ -122,6 +192,7 @@ public class CadPedido extends javax.swing.JFrame {
         consultaNomeProduto.setText("");
         consultaCategoria.setText("");
         consultaQuantidade.setText("");
+        consultaValor.setText("");
     }
        
         
@@ -152,6 +223,17 @@ public class CadPedido extends javax.swing.JFrame {
         consultaNomeProduto = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         consultaId = new javax.swing.JTextField();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        tbPedido = new javax.swing.JTable();
+        jToggleButton6 = new javax.swing.JToggleButton();
+        jLabel10 = new javax.swing.JLabel();
+        consultaValor = new javax.swing.JFormattedTextField();
+        jPanel2 = new javax.swing.JPanel();
+        jToggleButton4 = new javax.swing.JToggleButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tbProduto = new javax.swing.JTable();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tbCliente = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -192,20 +274,24 @@ public class CadPedido extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel1))
-                        .addGap(21, 21, 21)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtIdProduto, javax.swing.GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE)
-                            .addComponent(txtIdCliente)))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addComponent(jLabel2)
+                            .addGap(18, 18, 18)
+                            .addComponent(txtQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addComponent(jLabel3)
+                                    .addGap(26, 26, 26))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                    .addComponent(jLabel1)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(txtIdProduto, javax.swing.GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE)
+                                .addComponent(txtIdCliente))))
                     .addComponent(jToggleButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(100, Short.MAX_VALUE))
+                .addContainerGap(81, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -214,17 +300,17 @@ public class CadPedido extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(txtIdCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(53, 53, 53)
+                .addGap(35, 35, 35)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(txtIdProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(48, 48, 48)
+                .addGap(34, 34, 34)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(txtQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addGap(30, 30, 30)
                 .addComponent(jToggleButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel3.setBackground(new java.awt.Color(0, 51, 102));
@@ -277,6 +363,35 @@ public class CadPedido extends javax.swing.JFrame {
             }
         });
 
+        tbPedido.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Id", "Cliente", "Produto", "Valor"
+            }
+        ));
+        jScrollPane5.setViewportView(tbPedido);
+
+        jToggleButton6.setBackground(new java.awt.Color(102, 255, 51));
+        jToggleButton6.setSelected(true);
+        jToggleButton6.setText("Listar Histórico de Pedidos");
+        jToggleButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jToggleButton6ActionPerformed(evt);
+            }
+        });
+
+        jLabel10.setFont(new java.awt.Font("Arial Black", 0, 12)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel10.setText("Valor");
+
+        consultaValor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                consultaValorActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -284,29 +399,40 @@ public class CadPedido extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel8)
+                    .addComponent(jLabel9)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel7)
+                    .addComponent(jLabel6))
+                .addGap(26, 26, 26)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanel3Layout.createSequentialGroup()
+                            .addComponent(consultaQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(35, 35, 35)
+                            .addComponent(jLabel10)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(consultaValor, javax.swing.GroupLayout.DEFAULT_SIZE, 92, Short.MAX_VALUE))
+                        .addComponent(consultaCategoria)
+                        .addComponent(consultaNomeProduto)
+                        .addComponent(consultaNomeCliente)
+                        .addComponent(consultaCpf))
                     .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(consultaId, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addComponent(jToggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 151, Short.MAX_VALUE)
-                        .addComponent(jToggleButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jToggleButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel8)
-                            .addComponent(jLabel9)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel7)
-                            .addComponent(jLabel6))
-                        .addGap(26, 26, 26)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(consultaQuantidade)
-                            .addComponent(consultaCategoria)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(consultaId, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(consultaNomeProduto)
-                            .addComponent(consultaNomeCliente)
-                            .addComponent(consultaCpf))))
-                .addContainerGap())
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(92, 92, 92)
+                        .addComponent(jToggleButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -314,7 +440,9 @@ public class CadPedido extends javax.swing.JFrame {
                 .addGap(4, 4, 4)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(consultaId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(consultaId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jToggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jToggleButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
@@ -323,7 +451,7 @@ public class CadPedido extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(consultaNomeCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
                     .addComponent(consultaNomeProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -333,13 +461,83 @@ public class CadPedido extends javax.swing.JFrame {
                     .addComponent(jLabel7))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(consultaQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(consultaQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel10)
+                        .addComponent(consultaValor, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel6))
-                .addGap(53, 53, 53)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jToggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jToggleButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(105, 105, 105))
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jToggleButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(25, 25, 25)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jPanel2.setBackground(new java.awt.Color(51, 51, 51));
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Lista", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Arial Black", 0, 14), new java.awt.Color(204, 255, 255))); // NOI18N
+        jPanel2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jPanel2.setName("Lista"); // NOI18N
+
+        jToggleButton4.setBackground(new java.awt.Color(102, 255, 51));
+        jToggleButton4.setSelected(true);
+        jToggleButton4.setText("Listar Dados");
+        jToggleButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jToggleButton4ActionPerformed(evt);
+            }
+        });
+
+        tbProduto.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Código", "Produto", "Categoria", "Estoque", "Preço"
+            }
+        ));
+        jScrollPane1.setViewportView(tbProduto);
+        if (tbProduto.getColumnModel().getColumnCount() > 0) {
+            tbProduto.getColumnModel().getColumn(4).setHeaderValue("Preço");
+        }
+
+        tbCliente.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Código", "Nome", "CPF"
+            }
+        ));
+        jScrollPane2.setViewportView(tbCliente);
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 831, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(44, 44, 44)
+                        .addComponent(jToggleButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 65, Short.MAX_VALUE)))
                 .addContainerGap())
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(5, 5, 5)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jToggleButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -350,12 +548,19 @@ public class CadPedido extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
+
+        jPanel2.getAccessibleContext().setAccessibleDescription("Lista");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -379,6 +584,18 @@ public class CadPedido extends javax.swing.JFrame {
     private void jToggleButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton3ActionPerformed
         cadastraPedido(novoPedido);
     }//GEN-LAST:event_jToggleButton3ActionPerformed
+
+    private void jToggleButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton4ActionPerformed
+        listarDados();    
+    }//GEN-LAST:event_jToggleButton4ActionPerformed
+
+    private void jToggleButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton6ActionPerformed
+        listarPedidos();
+    }//GEN-LAST:event_jToggleButton6ActionPerformed
+
+    private void consultaValorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultaValorActionPerformed
+
+    }//GEN-LAST:event_consultaValorActionPerformed
 
     /**
      * @param args the command line arguments
@@ -423,7 +640,9 @@ public class CadPedido extends javax.swing.JFrame {
     private javax.swing.JTextField consultaNomeCliente;
     private javax.swing.JTextField consultaNomeProduto;
     private javax.swing.JTextField consultaQuantidade;
+    private javax.swing.JFormattedTextField consultaValor;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -433,10 +652,25 @@ public class CadPedido extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JToggleButton jToggleButton1;
     private javax.swing.JToggleButton jToggleButton2;
     private javax.swing.JToggleButton jToggleButton3;
+    private javax.swing.JToggleButton jToggleButton4;
+    private javax.swing.JToggleButton jToggleButton5;
+    private javax.swing.JToggleButton jToggleButton6;
+    private javax.swing.JTable tbCliente;
+    private javax.swing.JTable tbCliente1;
+    private javax.swing.JTable tbPedido;
+    private javax.swing.JTable tbProduto;
+    private javax.swing.JTable tbProduto1;
     private javax.swing.JTextField txtIdCliente;
     private javax.swing.JTextField txtIdProduto;
     private javax.swing.JTextField txtQuantidade;
