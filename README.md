@@ -48,3 +48,8 @@
 <h3 align="center">:white_check_mark: Diagrama Relacional do Banco de Dados:</h3> 
 <p align ="center">
   <img src ="Diagramas/BancoDeDados.PNG"</>
+ 
+<h3 align="center">:white_check_mark: Diagrama De Classe:</h3> 
+<p align ="center">
+  <img src ="Diagramas/DiagramaDeClasse.PNG"</>
+ 
