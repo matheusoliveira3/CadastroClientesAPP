@@ -12,6 +12,7 @@
 - :white_check_mark: Funcionalidade dos Botões
 - :white_check_mark: Conexão com o Banco de Dados
 - :white_check_mark: Busca de clientes ou produtos 
+- :white_check_mark: Busca de pedidos
 <h1 align= "center">:gem: Demostração do programa :gem:</h1>
 
 <h3 align="center">:white_check_mark: Tela Splash</h3>
